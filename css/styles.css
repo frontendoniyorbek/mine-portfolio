@@ -1,0 +1,151 @@
+:root {
+	--white-color: #fffaf2;
+	--light-brown-color: #f5d6ab;
+	--brown-color: #c66c49;
+	--dark-brown-color: #8b4136;
+	--dark-gray: #333333;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Libre Franklin', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 1.7;
+	letter-spacing: 0%;
+	color: var(--dark-gray);
+	background-color: white;
+}
+
+.container {
+	max-width: 1147px;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul,
+ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-wrapper {
+	background-image: url(../images/hero/background.png);
+	background-position: center;
+}
+
+.site-header {
+	padding-top: 93px;
+	padding-bottom: 93px;
+}
+
+.site-header__container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.site-header__logo-link {
+	margin-right: 20px;
+}
+
+.site-header__list {
+	display: flex;
+	align-items: center;
+}
+
+.site-header__item:not(:last-child) {
+	margin-right: 60px;
+}
+.site-header__link {
+	color: var(--white-color);
+}
+
+.menu {
+	display: none;
+}
+
+.hero {
+	padding-top: 52px;
+	padding-bottom: 240px;
+	color: var(--white-color);
+}
+
+.hero__title {
+}
+.hero__text {
+}
+
+.hero__link {
+	color: var(--white-color);
+}
+
+/* MEDIA */
+@media screen and (max-width: 1024px) {
+	body {
+		font-size: 16px;
+	}
+
+	.site-header {
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
+
+	.site-header__item:not(:last-child) {
+		margin-right: 40px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		font-size: 14px;
+	}
+
+	.site-header {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+
+	.site-header__container {
+		justify-content: center;
+	}
+
+	.site-header__list {
+		display: none;
+	}
+
+	.menu {
+		display: inline;
+		position: absolute;
+		top: 60px;
+		left: 20px;
+	}
+}
+
+@media screen and (max-width: 420px) {
+	body {
+		font-size: 12px;
+	}
+
+	.site-header {
+		padding-top: 39px;
+		padding-bottom: 39px;
+	}
+
+	.menu {
+		top: 39px;
+	}
+}
