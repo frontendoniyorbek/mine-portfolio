@@ -3,23 +3,105 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Théophile Seyrig - Designer Portfolio from Porto, Portugal" />
 		<title>Portfolio</title>
-		<!-- FONTS -->
+
+		<!-- Preload critical assets -->
+		<link rel="preload" href="images/header/logo.svg" as="image" />
+		<link rel="preload" href="css/styles.css" as="style" />
+
+		<!-- FONTS with display swap -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
-			rel="stylesheet" />
+			rel="stylesheet"
+			media="print"
+			onload="this.media='all'" />
 
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/styles.css" />
+		<!-- Fallback for font loading -->
+		<noscript>
+			<link
+				href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+				rel="stylesheet" />
+		</noscript>
+
+		<!-- Inline critical CSS -->
+		<style>
+			/* Critical CSS for above-the-fold content */
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Libre Franklin', sans-serif;
+			}
+			.wrapper {
+				width: 100%;
+			}
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 15px;
+			}
+			.site-header__container {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 20px 15px;
+			}
+			.site-header__list {
+				display: flex;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.site-header__item {
+				margin: 0 15px;
+			}
+			.site-header__link {
+				text-decoration: none;
+				color: #333;
+			}
+			.hero {
+				text-align: center;
+				padding: 80px 0;
+			}
+			.hero__title {
+				margin-bottom: 10px;
+			}
+			.hero__text {
+				margin-bottom: 30px;
+			}
+			.hero__link {
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #333;
+				color: white;
+				text-decoration: none;
+				border-radius: 4px;
+			}
+			.menu {
+				display: none;
+			}
+			@media (max-width: 768px) {
+				.site-header__list {
+					display: none;
+				}
+				.menu {
+					display: block;
+				}
+			}
+		</style>
+
+		<!-- Async load the main CSS -->
+		<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
 	</head>
 	<body>
 		<div class="wrapper">
 			<header class="site-header">
 				<div class="site-header__container container">
 					<a class="site-header__logo-link" href="/">
-						<img src="images/header/logo.svg" alt="logo" loading="lazy" />
+						<img src="images/header/logo.svg" alt="logo" loading="lazy" width="150" height="40" />
 					</a>
 
 					<ul class="site-header__list">
@@ -40,14 +122,14 @@
 						</li>
 					</ul>
 					<div class="menu">
-						<img src="images/header/menu.svg" alt="menu" loading="lazy" />
+						<img src="images/header/menu.svg" alt="menu" loading="lazy" width="24" height="24" />
 					</div>
 				</div>
 			</header>
 
 			<div class="hero">
 				<div class="container">
-					<h1 class="hero__title">Hi, It’s Théophile Seyrig</h1>
+					<h1 class="hero__title">Hi, It's Théophile Seyrig</h1>
 					<p class="hero__text">Designer from Porto, Portugal</p>
 					<a class="hero__link" href="#">Latest works</a>
 				</div>
