@@ -6,33 +6,29 @@
 		<meta name="description" content="Théophile Seyrig - Designer Portfolio from Porto, Portugal" />
 		<title>Portfolio</title>
 
-		<!-- High priority preloads for critical resources -->
+		<!-- Preload critical assets -->
 		<link rel="preload" href="images/header/logo.svg" as="image" fetchpriority="high" />
 		<link rel="preload" href="css/styles.css" as="style" />
 
-		<!-- DNS prefetch for external domains -->
+		<!-- DNS Prefetch + Preconnect for fonts -->
 		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
-		<!-- Preconnect for faster font loading -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-		<!-- Optimized font loading with display=swap parameter -->
+		<!-- Optimized font loading with specific subset -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap&text=HIts%20Th%C3%A9ophileSyrgDnfmPu"
+			href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap&text=HiItsThéophileSeyrigDesignerfromPortoPortugalHomeAboutSkillsPortfolioContactLatestworks"
 			rel="stylesheet"
 			media="print"
 			onload="this.media='all'" />
-
-		<!-- Fallback for font loading -->
 		<noscript>
 			<link
 				href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
 				rel="stylesheet" />
 		</noscript>
 
-		<!-- Further optimized critical CSS -->
+		<!-- Critical CSS inline -->
 		<style>
 			:root {
 				--main-color: #333;
@@ -130,17 +126,15 @@
 			}
 		</style>
 
-		<!-- Async load the main CSS with high priority -->
+		<!-- Async load full CSS -->
 		<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'" />
 		<noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
 
-		<!-- Preload hero section for LCP improvement -->
+		<!-- Inline performance script -->
 		<script>
-			// Inline performance optimization script
 			const observer = new PerformanceObserver(list => {
 				const entries = list.getEntries();
 				entries.forEach(entry => {
-					// Send to analytics or console in development
 					if (entry.name === 'LCP') {
 						console.log('LCP:', entry.startTime);
 					}
@@ -148,9 +142,7 @@
 			});
 			observer.observe({ type: 'largest-contentful-paint', buffered: true });
 
-			// Add page lifecycle hints
 			document.addEventListener('DOMContentLoaded', () => {
-				// Mark non-critical content for delayed loading
 				const nonCritical = document.querySelectorAll('.main-content');
 				if ('IntersectionObserver' in window) {
 					const observer = new IntersectionObserver(entries => {
@@ -165,7 +157,11 @@
 				}
 			});
 		</script>
+
+		<!-- Optional JS file (if you have one) -->
+		<!-- <script src="js/main.js" defer></script> -->
 	</head>
+
 	<body>
 		<div class="wrapper">
 			<header class="site-header">
@@ -182,24 +178,15 @@
 					</a>
 
 					<ul class="site-header__list">
-						<li class="site-header__item">
-							<a class="site-header__link" href="#">Home</a>
-						</li>
-						<li class="site-header__item">
-							<a class="site-header__link" href="#">About</a>
-						</li>
-						<li class="site-header__item">
-							<a class="site-header__link" href="#">Skills</a>
-						</li>
-						<li class="site-header__item">
-							<a class="site-header__link" href="#">Portfolio</a>
-						</li>
-						<li class="site-header__item">
-							<a class="site-header__link" href="#">Contact</a>
-						</li>
+						<li class="site-header__item"><a class="site-header__link" href="#">Home</a></li>
+						<li class="site-header__item"><a class="site-header__link" href="#">About</a></li>
+						<li class="site-header__item"><a class="site-header__link" href="#">Skills</a></li>
+						<li class="site-header__item"><a class="site-header__link" href="#">Portfolio</a></li>
+						<li class="site-header__item"><a class="site-header__link" href="#">Contact</a></li>
 					</ul>
+
 					<div class="menu">
-						<img src="images/header/menu.svg" alt="menu" loading="eager" width="24" height="24" decoding="async" />
+						<img src="images/header/menu.svg" alt="menu" width="24" height="24" decoding="async" loading="lazy" />
 					</div>
 				</div>
 			</header>
