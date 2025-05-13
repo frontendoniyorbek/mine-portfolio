@@ -6,15 +6,21 @@
 		<meta name="description" content="Théophile Seyrig - Designer Portfolio from Porto, Portugal" />
 		<title>Portfolio</title>
 
-		<!-- Preload critical assets -->
-		<link rel="preload" href="images/header/logo.svg" as="image" />
+		<!-- High priority preloads for critical resources -->
+		<link rel="preload" href="images/header/logo.svg" as="image" fetchpriority="high" />
 		<link rel="preload" href="css/styles.css" as="style" />
 
-		<!-- FONTS with display swap -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<!-- DNS prefetch for external domains -->
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+		<!-- Preconnect for faster font loading -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!-- Optimized font loading with display=swap parameter -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap&text=HIts%20Th%C3%A9ophileSyrgDnfmPu"
 			rel="stylesheet"
 			media="print"
 			onload="this.media='all'" />
@@ -22,31 +28,45 @@
 		<!-- Fallback for font loading -->
 		<noscript>
 			<link
-				href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+				href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
 				rel="stylesheet" />
 		</noscript>
 
-		<!-- Inline critical CSS -->
+		<!-- Further optimized critical CSS -->
 		<style>
-			/* Critical CSS for above-the-fold content */
+			:root {
+				--main-color: #333;
+				--bg-color: #fff;
+				--text-color: #333;
+				--container-width: 1200px;
+			}
 			body {
 				margin: 0;
 				padding: 0;
-				font-family: 'Libre Franklin', sans-serif;
+				font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				color: var(--text-color);
+				background: var(--bg-color);
 			}
 			.wrapper {
 				width: 100%;
+				overflow-x: hidden;
 			}
 			.container {
-				max-width: 1200px;
+				max-width: var(--container-width);
 				margin: 0 auto;
 				padding: 0 15px;
+				box-sizing: border-box;
 			}
 			.site-header__container {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				padding: 20px 15px;
+				height: 80px;
+			}
+			.site-header__logo-link {
+				display: block;
+				flex-shrink: 0;
 			}
 			.site-header__list {
 				display: flex;
@@ -59,28 +79,43 @@
 			}
 			.site-header__link {
 				text-decoration: none;
-				color: #333;
+				color: var(--main-color);
+				font-weight: 500;
+				position: relative;
 			}
 			.hero {
 				text-align: center;
-				padding: 80px 0;
+				padding: 60px 0;
+				content-visibility: auto;
+				contain-intrinsic-size: 0 500px;
 			}
 			.hero__title {
 				margin-bottom: 10px;
+				font-size: clamp(2rem, 5vw, 3rem);
 			}
 			.hero__text {
 				margin-bottom: 30px;
+				font-size: clamp(1rem, 2vw, 1.2rem);
 			}
 			.hero__link {
 				display: inline-block;
 				padding: 10px 20px;
-				background-color: #333;
+				background-color: var(--main-color);
 				color: white;
 				text-decoration: none;
 				border-radius: 4px;
+				font-weight: 500;
+				transition: background-color 0.2s;
 			}
 			.menu {
 				display: none;
+				width: 24px;
+				height: 24px;
+			}
+			.main-content {
+				padding: 40px 0;
+				content-visibility: auto;
+				contain-intrinsic-size: 0 400px;
 			}
 			@media (max-width: 768px) {
 				.site-header__list {
@@ -89,19 +124,61 @@
 				.menu {
 					display: block;
 				}
+				.hero {
+					padding: 40px 0;
+				}
 			}
 		</style>
 
-		<!-- Async load the main CSS -->
+		<!-- Async load the main CSS with high priority -->
 		<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'" />
 		<noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+
+		<!-- Preload hero section for LCP improvement -->
+		<script>
+			// Inline performance optimization script
+			const observer = new PerformanceObserver(list => {
+				const entries = list.getEntries();
+				entries.forEach(entry => {
+					// Send to analytics or console in development
+					if (entry.name === 'LCP') {
+						console.log('LCP:', entry.startTime);
+					}
+				});
+			});
+			observer.observe({ type: 'largest-contentful-paint', buffered: true });
+
+			// Add page lifecycle hints
+			document.addEventListener('DOMContentLoaded', () => {
+				// Mark non-critical content for delayed loading
+				const nonCritical = document.querySelectorAll('.main-content');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver(entries => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								entry.target.style.contentVisibility = 'visible';
+								observer.unobserve(entry.target);
+							}
+						});
+					});
+					nonCritical.forEach(el => observer.observe(el));
+				}
+			});
+		</script>
 	</head>
 	<body>
 		<div class="wrapper">
 			<header class="site-header">
 				<div class="site-header__container container">
 					<a class="site-header__logo-link" href="/">
-						<img src="images/header/logo.svg" alt="logo" loading="lazy" width="150" height="40" />
+						<img
+							src="images/header/logo.svg"
+							alt="logo"
+							loading="eager"
+							fetchpriority="high"
+							width="150"
+							height="40"
+							decoding="async" />
 					</a>
 
 					<ul class="site-header__list">
@@ -122,7 +199,7 @@
 						</li>
 					</ul>
 					<div class="menu">
-						<img src="images/header/menu.svg" alt="menu" loading="lazy" width="24" height="24" />
+						<img src="images/header/menu.svg" alt="menu" loading="eager" width="24" height="24" decoding="async" />
 					</div>
 				</div>
 			</header>
